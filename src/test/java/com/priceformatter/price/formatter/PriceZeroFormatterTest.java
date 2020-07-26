@@ -1,13 +1,14 @@
 package com.priceformatter.price.formatter;
 
-import static org.junit.Assert.assertTrue;
-
-import java.math.BigDecimal;
-
 import com.priceformatter.price.dto.FormattedPriceDTO;
 import com.priceformatter.price.dto.InstrumentConfigDTO;
 import com.priceformatter.price.dto.PriceDisplayDTO;
 import org.junit.Test;
+
+import java.math.BigDecimal;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class PriceZeroFormatterTest {
 
@@ -17,7 +18,7 @@ public class PriceZeroFormatterTest {
 	public void formatPrice_givenDecimalInstrument() {
 		FormattedPriceDTO formattedPriceDTO = priceFormatter.formatPrice(new PriceDisplayDTO(new BigDecimal("47.92"), new InstrumentConfigDTO(0, 2, 3, 4)));
 		assertTrue("4".equals(formattedPriceDTO.getBigFigure()));
-		assertTrue("7.9".equals(formattedPriceDTO.getDealingPrice()));
+		assertEquals("7.9", formattedPriceDTO.getDealingPrice());
 		assertTrue("200".equals(formattedPriceDTO.getFractionalPips()));
 		FormattedPriceDTO formattedPriceDTO2 = priceFormatter.formatPrice(
 				new PriceDisplayDTO(new BigDecimal("47.92"), new InstrumentConfigDTO(0, 2, 3, 10)));

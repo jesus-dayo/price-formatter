@@ -1,13 +1,14 @@
 package com.priceformatter.price.formatter;
 
+import com.priceformatter.constants.DisplayFormat;
+import com.priceformatter.price.dto.FormattedPriceDTO;
+import com.priceformatter.price.dto.PriceDisplayDTO;
+import com.priceformatter.util.PriceFormatHelper;
+import org.apache.commons.lang3.StringUtils;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Arrays;
-
-import com.priceformatter.price.dto.PriceDisplayDTO;
-import com.priceformatter.constants.DisplayFormat;
-import com.priceformatter.price.dto.FormattedPriceDTO;
-import com.priceformatter.util.PriceFormatHelper;
 
 public abstract class AbstractPriceFormatter implements IPriceFormatter {
 
@@ -87,14 +88,16 @@ public abstract class AbstractPriceFormatter implements IPriceFormatter {
 
     protected String getPartOfPrice(PriceDisplayDTO priceDisplay,int length) {
         char[] longPriceChar = priceDisplay.getLongPriceChar();
+        if (longPriceChar.length == 0) {
+            return StringUtils.EMPTY;
+        }
+
         char[] result = new char[0];
-        for(int i=0;i < length;i++) {
-            if(longPriceChar.length == 0) {
-                break;
-            }
+        int count = 0;
+        while (count != length && longPriceChar.length > 0) {
             result = push(result,getLastCharElement(longPriceChar));
-            if(getLastCharElement(longPriceChar) == '.') {
-                i--;
+            if (getLastCharElement(longPriceChar) != '.') {
+                count++;
             }
             longPriceChar = pop(longPriceChar);
         }
