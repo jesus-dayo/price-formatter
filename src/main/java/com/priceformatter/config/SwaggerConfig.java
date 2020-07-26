@@ -2,7 +2,6 @@ package com.priceformatter.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -19,14 +18,14 @@ public class SwaggerConfig {
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("com.tpicap.exam.price.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.priceformatter.price.controller"))
 				.paths(PathSelectors.any()).build().apiInfo(apiInfo());
 	}
 
 	private ApiInfo apiInfo() {
 		Contact contact = new Contact("Jesus Dayo", "", "jdayojr@gmail.com");
 		ApiInfo apiInfo = new ApiInfoBuilder().contact(contact)
-				.title("Exam").description("Price Format API").build();
+                .title("Price Formatter").description("Price Format API").build();
 		return apiInfo;
 	}
 
