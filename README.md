@@ -2,7 +2,7 @@
 1. Run `mvn clean install`
 
 ## Running the application
-1. Run `src/main/java/ExamApplication` in your favorite IDE
+1. Run `src/main/java/PriceFormatterApplication` in your favorite IDE
 or run `java -jar [build jar]`
 2. Access Swagger via http://localhost:8080/swagger-ui.html#/
 - @POST /api/v1/price/formatTrimZero - This is to cater  for “Additional rule(s)” in the exam.
